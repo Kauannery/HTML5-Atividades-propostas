@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulário Complexo com Validação</title>
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Formulário Complexo</h1>
+
+  <form id="myForm" onsubmit="return validateForm()">
+    <label for="name">Nome:</label>
+    <input type="text" id="name" required>
+    <br><br>
+
+    <label for="email">E-mail:</label>
+    <input type="email" id="email" required>
+    <br><br>
+
+    <label for="age">Idade:</label>
+    <input type="number" id="age" required>
+    <br><br>
+
+    <label for="gender">Gênero:</label>
+    <input type="radio" id="male" name="gender" required>
+    <label for="male">Masculino</label>
+    <input type="radio" id="female" name="gender" required>
+    <label for="female">Feminino</label>
+    <br><br>
+
+    <label for="country">País:</label>
+    <select id="country" required>
+      <option value="">Selecione</option>
+      <option value="brasil">Brasil</option>
+      <option value="eua">Estados Unidos</option>
+      <option value="canada">Canadá</option>
+    </select>
+    <br><br>
+
+    <label for="interests">Interesses:</label>
+    <select id="interests" multiple required>
+      <option value="esportes">Esportes</option>
+      <option value="cinema">Cinema</option>
+      <option value="tecnologia">Tecnologia</option>
+      <option value="viagens">Viagens</option>
+    </select>
+    <br><br>
+
+    <input type="submit" value="Enviar">
+  </form>
+
+  <script>
+    function validateForm() {
+      var form = document.getElementById("myForm");
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var age = document.getElementById("age").value;
+      var gender = document.querySelector('input[name="gender"]:checked');
+      var country = document.getElementById("country").value;
+      var interests = document.getElementById("interests").selectedOptions;
+
+      var error = false;
+
+      if (!name || !email || !age || !gender || !country || interests.length === 0) {
+        error = true;
+        form.classList.add("error");
+      } else {
+        form.classList.remove("error");
+      }
+
+      if (error) {
+        alert("Por favor, preencha todos os campos antes de enviar o formulário.");
+        return false;
+      } else {
+        // Aqui você pode realizar o envio do formulário
+        // Ou executar outras ações com os dados
+        return true;
+      }
+    }
+  </script>
+</body>
+</html>
